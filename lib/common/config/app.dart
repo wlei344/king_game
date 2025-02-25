@@ -8,7 +8,7 @@ class _App {
   // 底部高度
   final double bottomHeight = 100.0;
   // 浏览器的body最大宽度
-  final double webBodyMaxWidth = 480.0;
+  final double webBodyMaxWidth = 430.0;
   // 弹窗标题的高度
   final alertHeaderHeight = 80.0;
   // 弹窗底部的高度
