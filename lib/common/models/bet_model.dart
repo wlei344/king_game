@@ -1,0 +1,4 @@
+enum BetType {
+  oddAndEven,
+  bigAndSmall
+}
