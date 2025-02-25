@@ -100,21 +100,21 @@ Widget _buildSignInWin({
               }
             }
 
-            int length1 = signInDays > 0 && signInDays < 7
-              ? signInDays - 1
-              : signInDays < 1 ? 0 : 5;
+            int length1 = signInDays > 0 && signInDays <= 7
+              ? signInDays
+              : signInDays < 1 ? 0 : 7;
 
-            int length2 = signInDays > 7 && signInDays < 14
+            int length2 = signInDays > 7 && signInDays <= 14
               ? signInDays - 7
-              : signInDays < 14 ? 0 : 6;
+              : signInDays < 14 ? 0 : 7;
 
-            int length3 = signInDays > 14 && signInDays < 21
+            int length3 = signInDays > 14 && signInDays <= 21
               ? signInDays - 14
-              : signInDays < 21 ? 0 : 6;
+              : signInDays < 21 ? 0 : 7;
 
-            int length4 = signInDays > 21 && signInDays < 30
+            int length4 = signInDays > 21 && signInDays <= 30
               ? signInDays - 21
-              : signInDays < 21 ? 0 : 8;
+              : signInDays < 21 ? 0 : 9;
 
             return Align(alignment: Alignment.bottomCenter, child: Padding(padding: EdgeInsets.only(bottom: 20 + 10 + 6, left: container.maxWidth * 0.11, right: container.maxWidth * 0.11), child: Container(
               height: 12,
@@ -125,22 +125,22 @@ Widget _buildSignInWin({
               ),
               child: Row(children: [
                 Expanded(child: Align(alignment: Alignment.centerLeft, child: Container(
-                  width: container.maxWidth * 0.78 / 4 / 5 * length1,
+                  width: container.maxWidth * 0.78 / 4 / 7 * length1,
                   color: Color(0xFF9EF9FC),
                 ))),
                 SizedBox(width: container.maxWidth * 0.05),
                 Expanded(child: Align(alignment: Alignment.centerLeft, child: Container(
-                  width: container.maxWidth * 0.78 / 4 / 6 * length2,
+                  width: container.maxWidth * 0.78 / 4 / 7 * length2,
                   color: Color(0xFF9EF9FC),
                 ))),
                 SizedBox(width: container.maxWidth * 0.05),
                 Expanded(child: Align(alignment: Alignment.centerLeft, child: Container(
-                  width: container.maxWidth * 0.78 / 4 / 6 * length3,
+                  width: container.maxWidth * 0.78 / 4 / 7 * length3,
                   color: Color(0xFF9EF9FC),
                 ))),
                 SizedBox(width: container.maxWidth * 0.05),
                 Expanded(child: Align(alignment: Alignment.centerLeft, child: Container(
-                  width: container.maxWidth * 0.78 / 4 / 8 * length4,
+                  width: container.maxWidth * 0.78 / 4 / 9 * length4,
                   color: Color(0xFF9EF9FC),
                 ))),
               ]),

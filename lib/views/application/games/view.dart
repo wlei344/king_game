@@ -84,7 +84,7 @@ class GamesView extends StatelessWidget {
                   time: '1h20s',
                 ),
                 SizedBox(height: 20),
-                SizedBox(height: MyConfig.app.bottomHeight),
+                SafeArea(child: SizedBox(height: MyConfig.app.bottomHeight)),
               ])
             ),
           ),

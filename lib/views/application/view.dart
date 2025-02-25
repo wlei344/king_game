@@ -44,7 +44,7 @@ class ApplicationView extends GetView<ApplicationController> {
           ),
         ],
       ),
-      child: Row(
+      child: SafeArea(child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const SizedBox(width: 2),
@@ -79,7 +79,7 @@ class ApplicationView extends GetView<ApplicationController> {
 
           const SizedBox(width: 2),
         ],
-      ),
+      )),
     );
   }
 

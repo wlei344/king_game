@@ -35,7 +35,7 @@ class MineView extends StatelessWidget {
                 SizedBox(height: 20),
                 _buildBodyButtons(context, controller),
                 SizedBox(height: 20),
-                SizedBox(height: MyConfig.app.bottomHeight),
+                SafeArea(child: SizedBox(height: MyConfig.app.bottomHeight)),
               ])
             ),
           ),

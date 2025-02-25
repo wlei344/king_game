@@ -42,7 +42,7 @@ class StoreView extends StatelessWidget {
                   skinData: item,
                 )).toList()
               ))),
-              SizedBox(height: MyConfig.app.bottomHeight),
+              SafeArea(child: SizedBox(height: MyConfig.app.bottomHeight)),
             ])
           ),
         ]),
