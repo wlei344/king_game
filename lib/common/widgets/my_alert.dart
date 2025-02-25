@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class MyAlert extends StatefulWidget {
@@ -156,7 +155,7 @@ class _MyAlertState extends State<MyAlert> with TickerProviderStateMixin {
       ],
     );
 
-    final webBody = Container(
+    return Container(
       color: Colors.black,
       child: Center(
         child: Container(
@@ -172,8 +171,6 @@ class _MyAlertState extends State<MyAlert> with TickerProviderStateMixin {
         ),
       ),
     );
-
-    return kIsWeb ? webBody : body;
   }
 }
 
