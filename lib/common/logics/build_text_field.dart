@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 Widget buildTextField({
-  required String hintText,
-  required TextEditingController controller,
+  String? hintText,
+  TextEditingController? controller,
   EdgeInsetsGeometry? margin,
   Widget? prefixIcon,
   Widget? suffixIcon,

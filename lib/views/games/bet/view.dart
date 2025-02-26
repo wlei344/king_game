@@ -94,7 +94,7 @@ class BetView extends GetView<BetController> {
       child: Obx(() {
         final titleBox = MyStrokeText(
           text: title,
-          fontSize: 14,
+          fontSize: 18,
           fontFamily: 'Sans',
           strokeWidth: 3,
           dy: 3,
@@ -189,6 +189,8 @@ class BetView extends GetView<BetController> {
             isDebounce: false,
             onPressed: () {
               buildBetDialog(
+                sessionIndex: controller.state.sessionIndex,
+                competitionType: '联赛',
                 title: controller.state.gameIndex == 0 ? Lang.gameViewBigOrSmallBetting.tr : Lang.gameViewOddOrEvenBetting.tr,
                 betType: controller.state.gameIndex == 0 ? BetType.bigAndSmall : BetType.oddAndEven,
               );
@@ -299,7 +301,7 @@ class BetView extends GetView<BetController> {
             SizedBox(width: 4),
             MyStrokeText(
               text: teamNameLeft,
-              fontSize: 18,
+              fontSize: 16,
               fontFamily: 'Sans',
               dy: 3,
             ),
@@ -307,7 +309,7 @@ class BetView extends GetView<BetController> {
           Row(children: [
             MyStrokeText(
               text: teamNameRight,
-              fontSize: 18,
+              fontSize: 16,
               fontFamily: 'Sans',
               dy: 3,
             ),
@@ -356,6 +358,7 @@ class BetView extends GetView<BetController> {
                     text: competitionType,
                     fontSize: 14,
                     fontFamily: 'Sans',
+                    strokeWidth: 2,
                     dy: 0,
                   ),
                 ),
@@ -366,7 +369,7 @@ class BetView extends GetView<BetController> {
                   text: competitionName,
                   fontSize: 14,
                   dy: 0,
-                  strokeWidth: 2,
+                  strokeWidth: 1,
                   // fontFamily: 'Sans',
                   textColor: controller.state.gameIndex == 0 ? Color(0xFFFFB21B) : Color(0xFFFFF61B),
                 ))),
@@ -377,7 +380,7 @@ class BetView extends GetView<BetController> {
                   text: competitionSessions,
                   fontSize: 14,
                   textColor: Color(0xFFFFFFFF),
-                  strokeWidth: 3,
+                  strokeWidth: 2,
                   dy: 0,
                 ),
 
@@ -386,7 +389,7 @@ class BetView extends GetView<BetController> {
                 Flexible(child: FittedBox(child: MyStrokeText(
                   text: competitionTime,
                   fontSize: 14,
-                  strokeWidth: 2,
+                  strokeWidth: 1,
                   dy: 0,
                   textColor: controller.state.gameIndex == 0 ?  Color(0xFFCBA18E) : Color(0xFF8CBF90),
                 )))

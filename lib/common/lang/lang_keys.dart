@@ -115,6 +115,7 @@ abstract class Lang {
   static const betSmall = 'bet_small';
   static const betOdd = 'bet_odd';
   static const betEven = 'bet_even';
+  static const betInputHintText = 'bet_input_hint_text';
   static const betAmountMax = 'bet_amount_max';
   static const betVND = 'bet_vnd';
   static const betConfirm = 'bet_confirm';

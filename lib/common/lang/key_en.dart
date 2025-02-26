@@ -117,6 +117,7 @@ const Map<String, String> en = {
   Lang.betSmall: 'Small',
   Lang.betOdd: 'Odd',
   Lang.betEven: 'Even',
+  Lang.betInputHintText: 'Enter bet amount',
   Lang.betAmountMax: 'Max',
   Lang.betVND: 'Bet VND',
   Lang.betConfirm: 'Confirm Bet',

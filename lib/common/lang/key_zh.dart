@@ -115,6 +115,7 @@ const Map<String, String> zh = {
   Lang.betSmall: '小',
   Lang.betOdd: '单',
   Lang.betEven: '双',
+  Lang.betInputHintText: '输入投注金额',
   Lang.betAmountMax: '最大',
   Lang.betVND: '投注VND',
   Lang.betConfirm: '确认投注',

@@ -115,6 +115,7 @@ const Map<String, String> vi = {
   Lang.betSmall: 'Xỉu',
   Lang.betOdd: 'Lẻ',
   Lang.betEven: 'Chẵn',
+  Lang.betInputHintText: 'Nhập số tiền cược',
   Lang.betAmountMax: 'Tối đa',
   Lang.betVND: 'Cược VND',
   Lang.betConfirm: 'Xác nhận cược',

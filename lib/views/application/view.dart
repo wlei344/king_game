@@ -44,10 +44,11 @@ class ApplicationView extends GetView<ApplicationController> {
           ),
         ],
       ),
-      child: SafeArea(child: Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const SizedBox(width: 2),
+
 
           Obx(() => Expanded(flex: controller.state.pageIndex == 0 ? 3 : 2, child: _buildNavigation(
             context: context,
@@ -79,7 +80,7 @@ class ApplicationView extends GetView<ApplicationController> {
 
           const SizedBox(width: 2),
         ],
-      )),
+      ),
     );
   }
 
@@ -96,10 +97,16 @@ class ApplicationView extends GetView<ApplicationController> {
     final opacity = controller.state.pageIndex == index ? 1.0 : 0.0;
     final backgroundColor = controller.state.pageIndex == index ? Color.fromARGB(255, 97, 211, 250) : Color.fromARGB(255, 58, 133, 202);
 
+    double bottom = MediaQuery.of(context).padding.bottom;
+
+    // if (kIsWeb) {
+    //   bottom = 10;
+    // }
+
     final selectedText = MyStrokeText(
       text: title,
       fontFamily: 'Sans',
-      fontSize: 20,
+      fontSize: 18,
       strokeWidth: 4,
       strokeColor: Color(0xFF4D4D4D),
       shadowColor: Color(0xFF4D4D4D),
@@ -108,17 +115,20 @@ class ApplicationView extends GetView<ApplicationController> {
 
 
     return LayoutBuilder(builder: (context, constraints) {
-      final iconSize = constraints.maxWidth / 2.5;
+      final iconSize = constraints.maxWidth / 2.35;
 
-      final defaultIcon = Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        SizedBox(height: iconSize, child: icon),
-        SizedBox(height: 4),
-        MyStrokeText(
-          text: title,
-          fontSize: 14,
-          strokeWidth: 2,
-          dy: 2,
-        ),
+      final defaultIcon = Column(children: [
+        Expanded(child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          SizedBox(height: iconSize, child: icon),
+          SizedBox(height: 4),
+          MyStrokeText(
+            text: title,
+            fontSize: 14,
+            strokeWidth: 2,
+            dy: 2,
+          ),
+        ])),
+        Container(color: Colors.black.withValues(alpha: 0.1), height: bottom),
         // Text(title, style: TextStyle(fontSize: 14, color: Colors.white)),
       ]);
 
@@ -126,7 +136,7 @@ class ApplicationView extends GetView<ApplicationController> {
 
       final backgroundBox = Container(
         width: double.infinity,
-        height: height,
+        height: height + bottom,
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: backgroundColor,
@@ -137,39 +147,41 @@ class ApplicationView extends GetView<ApplicationController> {
         ),
         child: Stack(alignment: AlignmentDirectional.center, children: [
           Positioned.fill(top: 6, left: 2, right: 2, child: Container(
-            height: height,
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
-                color: boxColor,
-                borderRadius: BorderRadius.only(
-                  topLeft:  radius,
-                  topRight: radius,
+              color: boxColor,
+              borderRadius: BorderRadius.only(
+                topLeft:  radius,
+                topRight: radius,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: boxColor,
+                  offset: Offset(0, 0),
+                  blurRadius: 2,
+                  spreadRadius: 4,
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: boxColor,
-                    offset: Offset(0, 0),
-                    blurRadius: 2,
-                    spreadRadius: 4,
-                  ),
-                ]
+              ]
             ),
           )),
-          Positioned(right: -2, top: height / 5, child: SizedBox(width: 10, child: MyIcons.footerRightIcon)),
-          Positioned(left: -2, top: height / 2, child: SizedBox(width: 10, child: MyIcons.footerLeftIcon)),
+          Positioned(right: -2, top: (height + bottom) / 5, child: SizedBox(width: 10, child: MyIcons.footerRightIcon)),
+          Positioned(left: -2, top: (height + bottom) / 2, child: SizedBox(width: 10, child: MyIcons.footerLeftIcon)),
           Positioned.fill(child: Opacity(opacity: opacity, child: MyIcons.footerSelected)),
-          if (controller.state.pageIndex == index) Positioned(top: height / 2, child: selectedText),
+          if (controller.state.pageIndex == index) Positioned(bottom: bottom + height * 0.1, child: selectedText),
           if (controller.state.pageIndex != index) defaultIcon,
+          if (controller.state.pageIndex == index) Positioned(left: 0, right: 0, bottom: 0, child:
+            Container(color: Colors.white.withValues(alpha: 0.2), height: bottom),
+          ),
         ]),
       );
       return MyButton(
         onPressed: onPressed,
         isDebounce: false,
-        child: Stack(alignment: AlignmentDirectional.center, children: [
+        child: Stack(clipBehavior: Clip.none, alignment: AlignmentDirectional.center, children: [
           backgroundBox,
           if (controller.state.pageIndex == index)
-            Transform.translate(
-              offset: Offset(0, 0 - height / 2.4),
+            Positioned(
+              top: 0 - (height + bottom) / 7,
               child: selectedIcon,
             ),
         ]),
