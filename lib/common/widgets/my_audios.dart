@@ -13,7 +13,6 @@ enum MyAudioPath {
   exchangeFailed('audios/exchange_failed.mp3');
 
   final String path;
-
   const MyAudioPath(this.path);
 }
 
@@ -30,21 +29,26 @@ class MyAudio {
   final Map<MyAudioPath, AudioPlayer> _audioPlayers = {};
 
   Future<void> _play(MyAudioPath audioPath) async {
-    if (!UserController.to.isOpenAudio) {
-      return;
-    }
+    if (!UserController.to.isOpenAudio) return;
 
+    // 如果 AudioPlayer 不存在，创建并缓存
     if (!_audioPlayers.containsKey(audioPath)) {
-      _audioPlayers[audioPath] = AudioPlayer();
+      final player = AudioPlayer();
+      _audioPlayers[audioPath] = player;
+      await player.setSource(AssetSource(audioPath.path));
+      await player.setReleaseMode(ReleaseMode.stop);
     }
 
     final player = _audioPlayers[audioPath]!;
 
+    // 如果正在播放，先停止
     if (player.state == PlayerState.playing) {
       await player.stop();
     }
 
-    await player.play(AssetSource(audioPath.path));
+    // 从头播放
+    await player.seek(Duration.zero);
+    await player.resume();
   }
 
   Future<void> _pause() async {
