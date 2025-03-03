@@ -22,51 +22,26 @@ class MyAudio {
   MyAudio._internal();
 
   static Future<void> play(MyAudioPath audioPath) => _instance._play(audioPath);
-  static Future<void> pause() => _instance._pause();
-  static Future<void> stop() => _instance._stop();
-  static void dispose() => _instance._dispose();
 
   final Map<MyAudioPath, AudioPlayer> _audioPlayers = {};
 
   Future<void> _play(MyAudioPath audioPath) async {
     if (!UserController.to.isOpenAudio) return;
 
-    // 如果 AudioPlayer 不存在，创建并缓存
     if (!_audioPlayers.containsKey(audioPath)) {
+      // 如果 AudioPlayer 不存在，创建并缓存
       final player = AudioPlayer();
+      player.play(AssetSource(audioPath.path));
       _audioPlayers[audioPath] = player;
       await player.setSource(AssetSource(audioPath.path));
       await player.setReleaseMode(ReleaseMode.stop);
+    } else {
+      // 如果已存在，直接播放
+      final player = _audioPlayers[audioPath]!;
+      if (player.state == PlayerState.playing) {
+        await player.stop();
+      }
+      player.resume();
     }
-
-    final player = _audioPlayers[audioPath]!;
-
-    // 如果正在播放，先停止
-    if (player.state == PlayerState.playing) {
-      await player.stop();
-    }
-
-    // 从头播放
-    await player.seek(Duration.zero);
-    await player.resume();
-  }
-
-  Future<void> _pause() async {
-    for (var player in _audioPlayers.values) {
-      await player.pause();
-    }
-  }
-
-  Future<void> _stop() async {
-    for (var player in _audioPlayers.values) {
-      await player.stop();
-    }
-  }
-
-  void _dispose() {
-    for (var player in _audioPlayers.values) {
-      player.dispose();
-    }
-    _audioPlayers.clear();
   }
 }
