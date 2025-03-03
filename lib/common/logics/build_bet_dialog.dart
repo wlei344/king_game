@@ -57,7 +57,6 @@ Widget _buildFooter({
       Expanded(child: MyButton(isDebounce: false, onPressed: () {
         clearNumber.value++;
         clearNumber.refresh();
-        print(clearNumber.value);
       }, child: Container(
         height: 44,
         decoration: BoxDecoration(
