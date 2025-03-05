@@ -121,7 +121,7 @@ class MyIcons {
   static MyAssets get lotteryButton2 => MyAssets(name: 'lottery_button_2', style: MyAssetStyle.png);
   static MyAssets get turntableWin => MyAssets(name: 'turntable_win', style: MyAssetStyle.png);
   static MyAssets get boxBackground => MyAssets(name: 'box_background', style: MyAssetStyle.png, width: double.infinity, height: double.infinity, fit: BoxFit.fill);
-  static MyAssets lotteryHeaderButton(int index) => MyAssets(name: 'lottery_header_button_$index', style: MyAssetStyle.png, width: double.infinity, fit: BoxFit.fitWidth,);
+  static MyAssets lotteryHeaderButton(int index) => MyAssets(name: 'lottery_header_button_$index', style: MyAssetStyle.png, width: double.infinity, height: 40, fit: BoxFit.fill,);
 
   static MyAssets get gameHelp => MyAssets(name: 'game_help', style: MyAssetStyle.png);
   static MyAssets get gameTeam => MyAssets(name: 'game_team', style: MyAssetStyle.png);

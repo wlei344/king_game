@@ -34,6 +34,7 @@ class CustomButtonState extends State<MyButton> {
 
   void _onTapDown(TapDownDetails details) {
     if (!_isClickable) return;
+    MyAudio.play(MyAudioPath.click);
     _setOpacity(0.75);
   }
 
@@ -51,9 +52,6 @@ class CustomButtonState extends State<MyButton> {
     if (!_isClickable || widget.onPressed == null) return;
 
     Get.focusScope?.unfocus();
-
-    MyAudio.play(MyAudioPath.click);
-
     widget.onPressed?.call();
 
     if (widget.isDebounce) {

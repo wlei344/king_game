@@ -55,7 +55,7 @@ class LotteryView extends GetView<LotteryController> {
               text: Lang.gameTurntable.tr,
               strokeWidth: 4,
               fontFamily: "Sans",
-              fontSize: 13,
+              fontSize: 16,
               dy: 0,
             )))))
           ]),
@@ -72,7 +72,7 @@ class LotteryView extends GetView<LotteryController> {
               text: Lang.gameBox.tr,
               strokeWidth: 4,
               fontFamily: "Sans",
-              fontSize: 13,
+              fontSize: 16,
               dy: 0,
             )))))
           ]),
@@ -88,26 +88,30 @@ class LotteryView extends GetView<LotteryController> {
   }
 
   Widget _buildBoxView(BuildContext context) {
+    final size = Get.width.clamp(200, MyConfig.app.webBodyMaxWidth);
+
     final child = Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-
-      Stack(clipBehavior: Clip.none, alignment: AlignmentDirectional.center, children: [
-        SizedBox(
-          height: MyConfig.app.webBodyMaxWidth * 0.4,
-          width: MyConfig.app.webBodyMaxWidth * 0.4,
-        ),
-
-        Positioned(left: 0 - MyConfig.app.webBodyMaxWidth * 0.2, right: 0 - MyConfig.app.webBodyMaxWidth * 0.67, top: 0 - MyConfig.app.webBodyMaxWidth * 0.82, bottom: 0 - MyConfig.app.webBodyMaxWidth * 0.55, child: SizedBox(
-          child: SpineWidget.fromAsset(
-            'assets/spine/baoxiang_atlas.atlas',
-            'assets/spine/baoxiang_skel.skel',
-            controller.baoxiangController,
-            fit: BoxFit.cover,
+      Expanded(child: Container(
+        width: size * 1,
+        height: double.infinity,
+        color: Colors.grey.withValues(alpha: 0),
+        child: Center(child: Stack(clipBehavior: Clip.none, alignment: AlignmentDirectional.center, children: [
+          SizedBox(
+            height:  size * 0.4,
+            width: size * 0.4,
+            // color: Colors.red.withAlpha(0),
           ),
-        )),
-      ]),
 
-
-      const SizedBox(height: 60),
+          Positioned(left: 0 - size * 0.2, right: 0 - size * 0.67, top: 0 - size * 0.82, bottom: 0 - size * 0.55, child: SizedBox(
+            child: SpineWidget.fromAsset(
+              'assets/spine/baoxiang_atlas.atlas',
+              'assets/spine/baoxiang_skel.skel',
+              controller.baoxiangController,
+              fit: BoxFit.cover,
+            ),
+          )),
+        ])),
+      )),
 
       SafeArea(top: false, child: Column(children: [
         MyButton(isDebounce: false, onPressed: () {
@@ -192,7 +196,7 @@ class LotteryView extends GetView<LotteryController> {
   Widget _buildTurntableView(BuildContext context) {
     final child = Column(mainAxisAlignment: MainAxisAlignment.end, children: [
 
-      Stack(children: [
+      Expanded(child: Center(child: Stack(children: [
         Obx(() => MyTurntable(
           prizes: controller.state.turntablePrizes.value,
           key: controller.turntableKey,
@@ -218,10 +222,10 @@ class LotteryView extends GetView<LotteryController> {
           bottom: 0,
           right: 0,
           child: SpineWidget.fromAsset(
-            'assets/spine/eff_caidai_atlas.atlas',
-            'assets/spine/eff_caidai_skel.skel',
-            controller.caidaiController,
-            fit: BoxFit.cover
+              'assets/spine/eff_caidai_atlas.atlas',
+              'assets/spine/eff_caidai_skel.skel',
+              controller.caidaiController,
+              fit: BoxFit.cover
           ),
         ),
 
@@ -232,10 +236,10 @@ class LotteryView extends GetView<LotteryController> {
             height: 191 * 0.65,
             width: 178 * 0.65,
             child: SpineWidget.fromAsset(
-              'assets/spine/zuo_atlas.atlas',
-              'assets/spine/zuo_skel.skel',
-              controller.leftBabyController,
-              fit: BoxFit.cover
+                'assets/spine/zuo_atlas.atlas',
+                'assets/spine/zuo_skel.skel',
+                controller.leftBabyController,
+                fit: BoxFit.cover
             ),
           ),
         ),
@@ -247,14 +251,14 @@ class LotteryView extends GetView<LotteryController> {
             height: 172 * 0.65,
             width: 149 * 0.65,
             child: SpineWidget.fromAsset(
-              'assets/spine/you_atlas.atlas',
-              'assets/spine/you_skel.skel',
-              controller.rightBabyController,
-              fit: BoxFit.cover
+                'assets/spine/you_atlas.atlas',
+                'assets/spine/you_skel.skel',
+                controller.rightBabyController,
+                fit: BoxFit.cover
             ),
           ),
         ),
-      ]),
+      ]))),
 
 
       SafeArea(top: false, child: Column(children: [
@@ -329,10 +333,10 @@ class LotteryView extends GetView<LotteryController> {
             ]))
           ])),
           SizedBox(width: 32),
-        ],)
+        ]),
+        const SizedBox(height: kIsWeb ? 32 : 0),
       ])),
 
-      const SizedBox(height: kIsWeb ? 32 : 0),
     ]);
 
     return Stack(children: [
@@ -348,10 +352,10 @@ class LotteryView extends GetView<LotteryController> {
       Expanded(child: Stack(children: [
         SizedBox(height: 60, child: MyIcons.inviteWinIconMiddle,),
         Positioned.fill(top: 4, child: Column(children: [
-          Text(Lang.openTurntable.tr, style: TextStyle(
+          FittedBox(child: Center(child: Text(Lang.openTurntable.tr, maxLines: 1, style: TextStyle(
             fontSize: 16,
             fontFamily: 'Sans',
-          )),
+          ))),),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             SizedBox(height: 20, width: 20, child: MyIcons.headerStone),
             MyStrokeText(

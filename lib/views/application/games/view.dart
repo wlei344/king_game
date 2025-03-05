@@ -1,5 +1,4 @@
 import 'package:card_swiper/card_swiper.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:king_game/common/common.dart';
@@ -99,11 +98,7 @@ class GamesView extends StatelessWidget {
     required String time,
     void Function()? onPressed,
   }) {
-    double bodyWidth = Get.width;
-
-    if(kIsWeb || bodyWidth > MyConfig.app.webBodyMaxWidth) {
-      bodyWidth = Get.width.clamp(200, MyConfig.app.webBodyMaxWidth);
-    }
+    double bodyWidth = Get.width.clamp(200, MyConfig.app.webBodyMaxWidth);
 
     final buttonHeight = bodyWidth * 220 / 750;
 
@@ -179,11 +174,7 @@ class GamesView extends StatelessWidget {
   }
 
   Widget _buildSwiper(BuildContext context) {
-    double bodyWidth = Get.width;
-
-    if(kIsWeb || bodyWidth > MyConfig.app.webBodyMaxWidth) {
-      bodyWidth = Get.width.clamp(200, MyConfig.app.webBodyMaxWidth);
-    }
+    double bodyWidth = Get.width.clamp(200, MyConfig.app.webBodyMaxWidth);
 
     final swiper = Swiper(
       autoplay: true,

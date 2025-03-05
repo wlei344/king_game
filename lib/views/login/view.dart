@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
@@ -11,11 +10,7 @@ class LoginView extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    double paddingHorizontal = Get.width * 0.16;
-
-    if(kIsWeb || Get.width > MyConfig.app.webBodyMaxWidth) {
-      paddingHorizontal = Get.width.clamp(200, MyConfig.app.webBodyMaxWidth) * 0.16;
-    }
+    double  paddingHorizontal = Get.width.clamp(200, MyConfig.app.webBodyMaxWidth) * 0.16;
 
     final body = Column(
       crossAxisAlignment: CrossAxisAlignment.center,
